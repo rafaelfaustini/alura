@@ -3,6 +3,14 @@
 # ou se late
 
 
+def eficacia(resultados):
+    diferenca = resultado - esperado
+    sucesso = 0
+    total = len(resultados)
+    for x in range(0, total):
+        if(diferenca[i] == 0):
+            sucesso += 1
+    return round((sucesso / total) * 100, 2 )
 
 porco1 = [1,1,0] # [Tem perna curta, é gordinho mas não late
 porco2 = [1,1,0]
@@ -20,9 +28,10 @@ marcacoes = [1, 1, 1, -1, -1, -1]
 
 # É gordinho, tem perninha curta e late, será um cachorro ou um porco ?
 descobrir1 = [1,1,1]
-descobrir2 = [1,0,1]
-descobrir3 = [1,0,0]
+descobrir2 = [1,0,0]
+descobrir3 = [0,0,1]
 
+esperado = [-1,1,-1]
 from sklearn.naive_bayes import MultinomialNB
 
 modelo = MultinomialNB()
@@ -31,8 +40,11 @@ modelo.fit(dados, marcacoes)
 testes = [descobrir1, descobrir2, descobrir3]
 resultado = modelo.predict(testes)
 
+
+
 for i in range(0, len(testes)):    
     if resultado[i] == -1:
         print("[Teste %d] É um cachorro !!" % (i+1))
     else:
         print("[Teste %d] É um porco !!" % (i+1))
+print("A eficácia dos testes foi de %.2f %%" % eficacia(resultado))
